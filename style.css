@@ -1,0 +1,187 @@
+:root {
+    --bg-color: #f0f4f8;
+    --card-bg: #ffffff;
+    --primary: #00A1D6; /* 阿罗娜蓝 */
+    --primary-hover: #008bb8;
+    --text-main: #333;
+    --text-sub: #666;
+    --red: #ff4d4f;
+    --blue: #1890ff;
+}
+
+body {
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: var(--text-sub);
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 按钮样式 */
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 5px;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-option {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.btn-option:hover {
+    background-color: #e6f7ff;
+    color: var(--primary);
+}
+
+.btn-danger {
+    background-color: var(--red);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #eee;
+    color: #333;
+}
+
+.btn-small {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    background: transparent;
+    color: var(--text-sub);
+}
+
+/* 进度条 */
+.progress-container {
+    margin-bottom: 20px;
+}
+
+.progress-label {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.progress-bar-bg {
+    height: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--primary);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* 结果页图表 */
+.axis-container {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.axis-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bar-wrapper {
+    display: flex;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.bar-left {
+    background-color: var(--blue);
+    height: 100%;
+}
+
+.bar-right {
+    background-color: var(--red);
+    height: 100%;
+}
+
+.axis-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    margin-top: 4px;
+}
+
+.quote-box {
+    background-color: #fffbe6;
+    border-left: 4px solid #ffe58f;
+    padding: 15px;
+    margin: 20px 0;
+    font-style: italic;
+    text-align: left;
+}
+
+.book-box {
+    text-align: left;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+ul {
+    padding-left: 20px;
+}

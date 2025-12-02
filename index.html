@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 政治光谱测试 (Arona Ver.)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header>
+            <h1>🗳️ 政治光谱测试</h1>
+            <p class="subtitle">Arona's Political Compass Test</p>
+        </header>
+
+        <!-- 欢迎页 -->
+        <div id="start-screen" class="card">
+            <h2>👋 老师好！我是阿罗娜。</h2>
+            <p>欢迎来到 2025 版政治光谱测试。</p>
+            <ul class="rules">
+                <li>包含 <strong>6大维度</strong> 分析</li>
+                <li>基础测试 <strong>100题</strong></li>
+                <li>可选进阶 <strong>+50题</strong> (深水区)</li>
+            </ul>
+            <button class="btn btn-primary" onclick="startTest()">开始测试 Mission Start!</button>
+        </div>
+
+        <!-- 答题页 -->
+        <div id="quiz-screen" class="card hidden">
+            <div class="progress-container">
+                <div class="progress-label">进度: <span id="q-progress">0</span> / <span id="q-total">100</span></div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+            </div>
+            
+            <h3 id="question-text">题目加载中...</h3>
+            
+            <div class="options">
+                <button class="btn btn-option" onclick="answer('a')">强烈同意 (Strongly Agree)</button>
+                <button class="btn btn-option" onclick="answer('b')">同意 (Agree)</button>
+                <button class="btn btn-option" onclick="answer('c')">中立/不确定 (Neutral)</button>
+                <button class="btn btn-option" onclick="answer('d')">反对 (Disagree)</button>
+                <button class="btn btn-option" onclick="answer('e')">强烈反对 (Strongly Disagree)</button>
+            </div>
+            
+            <button class="btn btn-small" onclick="prevQuestion()" id="btn-undo" disabled>↩ 撤销上一题</button>
+        </div>
+
+        <!-- 中途结算页 (100题节点) -->
+        <div id="inter-screen" class="card hidden">
+            <h2>🎉 基础测试完成！</h2>
+            <p>老师，您已经完成了前 100 题。</p>
+            <p>您可以查看当前结果，或者<strong>加大力度</strong>进入包含极端哲学问题的“深水区”。</p>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="finishTest()">就在这里结算</button>
+                <button class="btn btn-danger" onclick="enterExtendedMode()">🔥 加大力度 (+50题)</button>
+            </div>
+        </div>
+
+        <!-- 结果页 -->
+        <div id="result-screen" class="card hidden">
+            <h2>📊 测试报告</h2>
+            
+            <div class="match-box">
+                <div class="match-label">最接近的立场</div>
+                <h1 id="ideology-name">加载中...</h1>
+                <p id="ideology-desc" class="ideology-desc"></p>
+                <div id="ideology-quote" class="quote-box hidden"></div>
+            </div>
+
+            <div id="axes-results">
+                <!-- 维度条将通过 JS 插入这里 -->
+            </div>
+
+            <div id="book-rec" class="book-box hidden">
+                <h3>📚 推荐阅读</h3>
+                <ul id="book-list"></ul>
+            </div>
+
+            <button class="btn btn-primary" onclick="location.reload()">🔄 重新测试</button>
+        </div>
+        
+        <footer>
+            <p>Powered by NoneBot Plugin Data | Frontend by Arona</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

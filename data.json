@@ -1,0 +1,461 @@
+{
+  "meta": {
+    "axes": {
+      "econ": { "name": "经济维", "left": "平等/公有", "right": "市场/私有" },
+      "dipl": { "name": "外交维", "left": "世界/互助", "right": "民族/主权" },
+      "govt": { "name": "公民维", "left": "自由/权利", "right": "权威/秩序" },
+      "scty": { "name": "社会维", "left": "进步/世俗", "right": "传统/宗教" },
+      "env":  { "name": "环境维", "left": "生态/深绿", "right": "工业/人类" },
+      "jus":  { "name": "司法维", "left": "改造/宽恕", "right": "惩罚/威慑" }
+    },
+    "options_map": {
+      "a": { "name": "强烈同意", "weight": 1.0 },
+      "b": { "name": "同意", "weight": 0.5 },
+      "c": { "name": "中立/不确定", "weight": 0.0 },
+      "d": { "name": "反对", "weight": -0.5 },
+      "e": { "name": "强烈反对", "weight": -1.0 }
+    }
+  },
+  "questions": [
+    { "text": "对富人征收惩罚性税收是实现社会公平的必要手段。", "axis": "econ", "effect": -10 },
+    { "text": "如果是为了国家利益，对他国进行军事干预是正当的。", "axis": "dipl", "effect": 10 },
+    { "text": "无论情况如何，同性伴侣都应拥有收养儿童的权利。", "axis": "scty", "effect": -10 },
+    { "text": "拥有武器是公民对抗暴政的最后防线。", "axis": "govt", "effect": -10 },
+    { "text": "为了经济发展，一定程度的环境污染是不可避免的。", "axis": "env", "effect": 10 },
+    { "text": "死刑是维持正义所必需的威慑手段。", "axis": "jus", "effect": 10 },
+    { "text": "关键的基础设施（水电、铁路）不应由私人资本控制。", "axis": "econ", "effect": -10 },
+    { "text": "为了打击恐怖主义，政府监控公民通讯是可以接受的。", "axis": "govt", "effect": 10 },
+    { "text": "与其援助国外的难民，不如优先解决本国的贫困问题。", "axis": "dipl", "effect": 10 },
+    { "text": "抽象艺术毫无价值，是对传统审美的亵渎。", "axis": "scty", "effect": 10 },
+    { "text": "监狱的首要目的是改造罪犯，而不是惩罚他们。", "axis": "jus", "effect": -10 },
+    { "text": "人类活动是导致全球变暖的主要原因。", "axis": "env", "effect": -10 },
+    { "text": "只要没有直接受害者，吸毒、赌博等行为不应被定罪。", "axis": "govt", "effect": -10 },
+    { "text": "国际法庭的裁决应当凌驾于主权国家的法律之上。", "axis": "dipl", "effect": -10 },
+    { "text": "宗教在公共生活和政府决策中不应扮演任何角色。", "axis": "scty", "effect": -10 },
+    { "text": "土地不应成为可以自由买卖的商品。", "axis": "econ", "effect": -10 },
+    { "text": "如果没什么可隐瞒的，就不必担心警察的搜查。", "axis": "govt", "effect": 10 },
+    { "text": "全球化通过跨国贸易造福了所有人。", "axis": "dipl", "effect": -10 },
+    { "text": "传统的性别角色分工是自然且必要的。", "axis": "scty", "effect": 10 },
+    { "text": "即使会损害经济，我们也应强制执行最严格的环保标准。", "axis": "env", "effect": -10 },
+    { "text": "对于重刑犯，应当实行强制劳动改造。", "axis": "jus", "effect": 10 },
+    { "text": "公司解雇员工不应受到政府的过多限制。", "axis": "econ", "effect": 10 },
+    { "text": "国家应当强制所有适龄公民服兵役。", "axis": "govt", "effect": 10 },
+    { "text": "我们需要一个统一的世界政府来解决全球问题。", "axis": "dipl", "effect": -10 },
+    { "text": "婚前性行为是不道德的。", "axis": "scty", "effect": 10 },
+    { "text": "从长远来看，生产资料应当归全社会所有。", "axis": "econ", "effect": -10 },
+    { "text": "无政府状态会导致混乱，我们需要强有力的领袖。", "axis": "govt", "effect": 10 },
+    { "text": "保护本国工业比自由贸易更重要。", "axis": "dipl", "effect": 10 },
+    { "text": "转基因食品对人类健康和环境构成威胁。", "axis": "env", "effect": -10 },
+    { "text": "罪犯也是社会的受害者，应该得到心理治疗。", "axis": "jus", "effect": -10 },
+    { "text": "医疗和教育应当是免费的公共服务，而非商品。", "axis": "econ", "effect": -10 },
+    { "text": "外来移民丰富了我们的文化。", "axis": "dipl", "effect": -10 },
+    { "text": "无论付出什么经济代价，保护生物多样性都应优先。", "axis": "env", "effect": -10 },
+    { "text": "自由市场是分配资源的最有效方式。", "axis": "econ", "effect": 10 },
+    { "text": "哪怕言论让他人感到冒犯，也不应被法律禁止。", "axis": "govt", "effect": -10 },
+    { "text": "有些文化确实比其他文化更优越。", "axis": "dipl", "effect": 10 },
+    { "text": "通过基因工程改良人类是可以接受的。", "axis": "scty", "effect": -10 },
+    { "text": "哪怕是亏损的国企也应该维持，以保障就业。", "axis": "econ", "effect": -10 },
+    { "text": "由于大众容易被愚弄，精英治国比民主投票更好。", "axis": "govt", "effect": 10 },
+    { "text": "联合国常常侵犯主权国家的利益。", "axis": "dipl", "effect": 10 },
+    { "text": "堕胎权是女性对自己身体的基本权利。", "axis": "scty", "effect": -10 },
+    { "text": "以眼还眼，以牙还牙是正义的基础。", "axis": "jus", "effect": 10 },
+    { "text": "核能是解决气候变化的清洁能源方案。", "axis": "env", "effect": 10 },
+    { "text": "为了国家安全，牺牲部分隐私是值得的。", "axis": "govt", "effect": 10 },
+    { "text": "应该允许地区通过公投独立。", "axis": "dipl", "effect": -10 },
+    { "text": "在学校体罚学生有时是必要的。", "axis": "scty", "effect": 10 },
+    { "text": "银行和金融业是现代经济的吸血鬼。", "axis": "econ", "effect": -10 },
+    { "text": "无论如何，必须维持社会的等级秩序。", "axis": "govt", "effect": 10 },
+    { "text": "只要能赚钱，与独裁政权做生意也没问题。", "axis": "dipl", "effect": 10 },
+    { "text": "技术进步自然会解决环境问题，不需要政府过度干预。", "axis": "env", "effect": 10 },
+    { "text": "最低工资法实际上伤害了穷人找工作的机会。", "axis": "econ", "effect": 10 },
+    { "text": "国家有权控制互联网上的信息流动。", "axis": "govt", "effect": 10 },
+    { "text": "我们应当削减对外援助。", "axis": "dipl", "effect": 10 },
+    { "text": "安乐死应当合法化。", "axis": "scty", "effect": -10 },
+    { "text": "即使是非法移民，也应享有人权和基本保护。", "axis": "dipl", "effect": -10 },
+    { "text": "没有政府，社会将无法运转。", "axis": "govt", "effect": 10 },
+    { "text": "相比于跨国公司，我更信任本国的小企业。", "axis": "dipl", "effect": 10 },
+    { "text": "应当禁止在公共场合穿着过于暴露的衣物。", "axis": "scty", "effect": 10 },
+    { "text": "富人无论如何都会找到避税的方法，所以高税收没用。", "axis": "econ", "effect": 10 },
+    { "text": "私家车是自由的象征，不应受到限制。", "axis": "env", "effect": 10 },
+    { "text": "父母有权决定孩子接受什么样的教育，政府不应干涉。", "axis": "scty", "effect": 10 },
+    { "text": "各尽所能，按需分配是理想的社会状态。", "axis": "econ", "effect": -10 },
+    { "text": "持不同政见者对社会稳定构成威胁。", "axis": "govt", "effect": 10 },
+    { "text": "既然是一家人，就不该说两家话（支持大一统）。", "axis": "dipl", "effect": 10 },
+    { "text": "福利国家会养懒汉。", "axis": "econ", "effect": 10 },
+    { "text": "彻底的言论自由包括发表仇恨言论的自由。", "axis": "govt", "effect": -10 },
+    { "text": "哪怕会损害本国经济，也要遵守国际环保条约。", "axis": "dipl", "effect": -10 },
+    { "text": "大多数罪犯是社会环境的受害者，应以教育为主。", "axis": "jus", "effect": -10 },
+    { "text": "由市场决定的价格是最公正的。", "axis": "econ", "effect": 10 },
+    { "text": "为了公共利益，强征私人土地是可以接受的。", "axis": "govt", "effect": 10 },
+    { "text": "我们应该拥有一个统一的世界货币。", "axis": "dipl", "effect": -10 },
+    { "text": "色情制品应当被完全禁止。", "axis": "scty", "effect": 10 },
+    { "text": "只要机会公平，结果的不平等是可以接受的。", "axis": "econ", "effect": 10 },
+    { "text": "枪杆子里出政权。", "axis": "govt", "effect": 10 },
+    { "text": "民族主义是战争的根源。", "axis": "dipl", "effect": -10 },
+    { "text": "婚姻的定义必须是一男一女。", "axis": "scty", "effect": 10 },
+    { "text": "大企业对政府政策的影响力过大了。", "axis": "econ", "effect": -10 },
+    { "text": "我们应当接受更多的国际难民。", "axis": "dipl", "effect": -10 },
+    { "text": "占星术和风水有时比科学更有效。", "axis": "scty", "effect": 10 },
+    { "text": "知识产权（专利/版权）阻碍了人类进步。", "axis": "econ", "effect": -10 },
+    { "text": "所有的权威都应当受到质疑。", "axis": "govt", "effect": -10 },
+    { "text": "与其当世界警察，不如管好自家后院。", "axis": "dipl", "effect": 10 },
+    { "text": "过度追求政治正确限制了人们的思想。", "axis": "scty", "effect": 10 },
+    { "text": "通过继承获得的财富是不公平的。", "axis": "econ", "effect": -10 },
+    { "text": "我们需要更多的警察来维持秩序。", "axis": "govt", "effect": 10 },
+    { "text": "各种族和民族之间没有本质的区别。", "axis": "dipl", "effect": -10 },
+    { "text": "吸烟酗酒是个人选择，政府不应征收重税限制。", "axis": "scty", "effect": -10 },
+    { "text": "只要自愿，成年人之间的任何交易（包括性）都应合法。", "axis": "econ", "effect": 10 },
+    { "text": "如果投票能改变什么，那它就是非法的。", "axis": "govt", "effect": -10 },
+    { "text": "国际援助通常只是新殖民主义的工具。", "axis": "dipl", "effect": 10 },
+    { "text": "现代社会过于冷漠，我们需要回归社群生活。", "axis": "scty", "effect": 10 },
+    { "text": "贸易保护主义最终会伤害所有人。", "axis": "econ", "effect": 10 },
+    { "text": "复杂的官僚机构是现代社会的毒瘤。", "axis": "govt", "effect": -10 },
+    { "text": "间谍活动是维护国家安全的必要手段。", "axis": "dipl", "effect": 10 },
+    { "text": "即使是出于讽刺，侮辱国旗或宗教标志也是不可接受的。", "axis": "scty", "effect": 10 },
+    { "text": "为了火星殖民，地球上的一部分牺牲是必要的。", "axis": "env", "effect": 10 },
+    { "text": "应当允许私人拥有军用级别的武器。", "axis": "govt", "effect": -10 },
+    { "text": "如果能降低犯罪率，我愿意接受全面的DNA数据库监控。", "axis": "jus", "effect": 10 },
+    { "text": "人类理应成为地球的主宰。", "axis": "env", "effect": 10 },
+    { "text": "无期徒刑比死刑更残忍。", "axis": "jus", "effect": 10 },
+    { "text": "（进阶题开始）为了人类基因的优化，强制绝育某些劣势群体是可以讨论的。", "axis": "govt", "effect": 10 },
+    { "text": "如果人工智能产生了自我意识，关闭它就等同于谋杀。", "axis": "scty", "effect": -10 },
+    { "text": "为了这一代人的繁荣，透支子孙后代的资源是无奈之举。", "axis": "env", "effect": 10 },
+    { "text": "当法律无法伸张正义时，私刑是道德的。", "axis": "jus", "effect": 10 },
+    { "text": "所有国界线最终都应该被消除。", "axis": "dipl", "effect": -10 },
+    { "text": "为了建立乌托邦，清洗掉旧时代的既得利益者是必要的代价。", "axis": "govt", "effect": 10 },
+    { "text": "核战争虽然可怕，但有时是重新洗牌的唯一方式。", "axis": "dipl", "effect": 10 },
+    { "text": "动物园的存在本身就是不道德的。", "axis": "env", "effect": -10 },
+    { "text": "监狱应当像宾馆一样舒适，以体现人道主义。", "axis": "jus", "effect": -10 },
+    { "text": "纯粹的自由意志不存在，人类只是生化反应的机器。", "axis": "scty", "effect": 10 },
+    { "text": "哪怕全世界都陷入贫困，也要保证绝对的结果平等。", "axis": "econ", "effect": -10 },
+    { "text": "君主制在某些文化中比民主制更稳定有效。", "axis": "govt", "effect": 10 },
+    { "text": "人类中心主义是环境破坏的根源。", "axis": "env", "effect": -10 },
+    { "text": "对恐怖分子进行酷刑逼供在紧急情况下是合法的。", "axis": "jus", "effect": 10 },
+    { "text": "为了阻止病毒传播，政府有权焊死居民的大门。", "axis": "govt", "effect": 10 },
+    { "text": "在火灾中，救一幅名画比救一只猫更重要。", "axis": "scty", "effect": 10 },
+    { "text": "无论是私有制还是公有制，本质都是少数人剥削多数人。", "axis": "econ", "effect": -10 },
+    { "text": "若是为了保护濒危物种，射杀偷猎者是正义的。", "axis": "env", "effect": -10 },
+    { "text": "复仇是人类最原始且正当的情感需求。", "axis": "jus", "effect": 10 },
+    { "text": "如果一个国家的人民选择民主地废除民主，他们应该被允许。", "axis": "govt", "effect": -10 },
+    { "text": "为了保护本国文化纯洁性，完全的闭关锁国是可行的。", "axis": "dipl", "effect": 10 },
+    { "text": "富人不仅应多纳税，他们的存在本身就是道德失误。", "axis": "econ", "effect": -10 },
+    { "text": "为了消灭贫困，我们应该通过强力手段重新分配所有财产。", "axis": "econ", "effect": -10 },
+    { "text": "自然选择适用于人类社会，弱者被淘汰是自然的。", "axis": "scty", "effect": 10 },
+    { "text": "如果能实现世界和平，我愿意接受外星人的殖民统治。", "axis": "dipl", "effect": -10 },
+    { "text": "儿童不属于父母，而属于国家/集体。", "axis": "scty", "effect": 10 },
+    { "text": "为了科学进步，进行非人道的人体实验在某些情况下是必要的。", "axis": "scty", "effect": 10 },
+    { "text": "如果这能拯救数百万人的生命，毁灭一种文化是可以接受的。", "axis": "dipl", "effect": -10 },
+    { "text": "真正的环保主义者应该支持人类自愿灭绝运动。", "axis": "env", "effect": -10 },
+    { "text": "没有信仰的人没有道德底线。", "axis": "scty", "effect": 10 },
+    { "text": "在法庭上，目击证词应该完全被脑成像测谎技术取代。", "axis": "jus", "effect": 10 },
+    { "text": "只要能最大化总体幸福，牺牲少数无辜者是道德的。", "axis": "scty", "effect": -10 },
+    { "text": "公司应该有权拥有私人军队来保护财产。", "axis": "econ", "effect": 10 },
+    { "text": "国家与其说是保护者，不如说是最大的犯罪集团。", "axis": "govt", "effect": -10 },
+    { "text": "如果机器能比人类更公正地执法，我们就应该解散人类法官。", "axis": "jus", "effect": -10 },
+    { "text": "为了防止犯罪，应当对所有新生儿进行基因筛查。", "axis": "govt", "effect": 10 },
+    { "text": "全球变暖其实是一个旨在控制发展中国家的骗局。", "axis": "env", "effect": 10 },
+    { "text": "为了保护环境，我们应该回到农业时代的生活水平。", "axis": "env", "effect": -10 },
+    { "text": "性工作应该像任何其他工作一样被正常化和征税。", "axis": "scty", "effect": -10 },
+    { "text": "如果你的孩子犯了死罪，你应该亲手执行死刑。", "axis": "jus", "effect": 10 },
+    { "text": "爱国主义是恶棍最后的避难所。", "axis": "dipl", "effect": -10 },
+    { "text": "慈善事业只是资本主义用来掩盖其罪恶的遮羞布。", "axis": "econ", "effect": -10 },
+    { "text": "如果能够永生，我愿意为此放弃生育权。", "axis": "scty", "effect": -10 },
+    { "text": "为了大多数人的安全，少数人必须被预防性拘留。", "axis": "jus", "effect": 10 },
+    { "text": "所有形式的继承权都应被废除，死后财产充公。", "axis": "econ", "effect": -10 },
+    { "text": "相比于充满谎言的民主，我更喜欢诚实的独裁。", "axis": "govt", "effect": 10 },
+    { "text": "人类文明的未来在于殖民宇宙，而不是修复地球。", "axis": "env", "effect": 10 },
+    { "text": "对连环杀手进行公开处决可以净化社会风气。", "axis": "jus", "effect": 10 },
+    { "text": "如果算法能以99%的准确率预测犯罪，那么对潜在罪犯进行预防性逮捕就是正义的。", "axis": "jus", "effect": 10 },
+    { "text": "最后一道题：你认为人类文明值得被拯救吗？", "axis": "scty", "effect": -10 }
+  ],
+  "ideologies": [
+    {
+      "name": "马克思列宁主义",
+      "desc": "你主张先锋队政党、中央计划经济和无产阶级专政，强调纪律与组织。",
+      "figures": "列宁、斯大林、卡斯特罗",
+      "stats": { "econ": 0, "dipl": 20, "govt": 100, "scty": 40, "env": 60, "jus": 80 },
+      "books": ["《国家与革命》", "《怎么办？》", "《帝国主义是资本主义的最高阶段》"],
+      "quote": {
+        "text": "Государство — это машина для подавления одного класса другим.",
+        "trans": "国家是一个阶级压迫另一个阶级的机器。",
+        "author": "V.I. Lenin"
+      }
+    },
+    {
+      "name": "托洛茨基主义",
+      "desc": "你主张不断革命论，反对官僚主义，坚信社会主义必须是全球性的。",
+      "figures": "托洛茨基、波萨达斯",
+      "stats": { "econ": 0, "dipl": 0, "govt": 60, "scty": 10, "env": 50, "jus": 40 },
+      "books": ["《被背叛的革命》", "《不断革命论》", "《过渡纲领》"],
+      "quote": {
+        "text": "Life is not an easy matter... You cannot live through it without falling into prostration and cynicism unless you have before you a great idea.",
+        "trans": "生活并不容易...除非你面前有一个伟大的理想，否则你无法度过它而不陷入颓废和愤世嫉俗。",
+        "author": "Leon Trotsky"
+      }
+    },
+    {
+      "name": "正统马克思主义",
+      "desc": "你强调历史唯物主义和阶级斗争，相信资本主义因内部矛盾必然灭亡。",
+      "figures": "卡尔·马克思、恩格斯、卢森堡",
+      "stats": { "econ": 0, "dipl": 10, "govt": 40, "scty": 20, "env": 50, "jus": 30 },
+      "books": ["《资本论》", "《共产党宣言》", "《社会改良还是革命？》"],
+      "quote": {
+        "text": "Proletarier aller Länder, vereinigt euch!",
+        "trans": "全世界无产者，联合起来！",
+        "author": "Karl Marx"
+      }
+    },
+    {
+      "name": "社会民主主义",
+      "desc": "你支持在资本主义框架下，通过高税收和福利来调节不平等，维护社会公正。",
+      "figures": "伯尼·桑德斯、奥洛夫·帕尔梅",
+      "stats": { "econ": 30, "dipl": 40, "govt": 50, "scty": 20, "env": 30, "jus": 20 },
+      "books": ["《政治的首要地位》", "《平等的精神》", "《21世纪资本论》"],
+      "quote": {
+        "text": "Politics is about wanting things.",
+        "trans": "政治就是关于意愿。",
+        "author": "Olof Palme"
+      }
+    },
+    {
+      "name": "社会自由主义",
+      "desc": "你注重个人自由，但也支持政府干预以保障机会均等和基本福利。",
+      "figures": "凯恩斯、罗尔斯",
+      "stats": { "econ": 40, "dipl": 30, "govt": 40, "scty": 10, "env": 40, "jus": 30 },
+      "books": ["《正义论》", "《就业、利息和货币通论》", "《论自由》"],
+      "quote": {
+        "text": "Justice is the first virtue of social institutions, as truth is of systems of thought.",
+        "trans": "正义是社会制度的首要美德，正如真理是思想体系的首要美德一样。",
+        "author": "John Rawls"
+      }
+    },
+    {
+      "name": "新自由主义",
+      "desc": "你支持全球化、私有化、去监管，相信市场机制和滴灌效应。",
+      "figures": "里根、撒切尔、弗里德曼",
+      "stats": { "econ": 80, "dipl": 20, "govt": 50, "scty": 40, "env": 70, "jus": 60 },
+      "books": ["《资本主义与自由》", "《通往奴役之路》", "《阿特拉斯耸耸肩》"],
+      "quote": {
+        "text": "There is no such thing as society. There are individual men and women, and there are families.",
+        "trans": "没有所谓的社会，只有单个的男人、女人和家庭。",
+        "author": "Margaret Thatcher"
+      }
+    },
+    {
+      "name": "古典自由主义",
+      "desc": "你极其重视个人自由和财产权，反对政府对经济和社会的过度干预。",
+      "figures": "洛克、亚当·斯密",
+      "stats": { "econ": 90, "dipl": 50, "govt": 20, "scty": 40, "env": 60, "jus": 40 },
+      "books": ["《政府论》", "《国富论》", "《道德情操论》"],
+      "quote": {
+        "text": "The end of law is not to abolish or restrain, but to preserve and enlarge freedom.",
+        "trans": "法律的目的不是废除或限制自由，而是保护和扩大自由。",
+        "author": "John Locke"
+      }
+    },
+    {
+      "name": "自由意志主义",
+      "desc": "你认为税收即盗窃，政府越小越好，主张完全的市场自由和个人自治。",
+      "figures": "诺齐克、罗恩·保罗",
+      "stats": { "econ": 100, "dipl": 50, "govt": 10, "scty": 10, "env": 80, "jus": 30 },
+      "books": ["《无政府、国家与乌托邦》", "《自由的伦理》", "《人原本的行动》"],
+      "quote": {
+        "text": "Taxation of earnings from labor is on a par with forced labor.",
+        "trans": "对劳动所得征税等同于强迫劳动。",
+        "author": "Robert Nozick"
+      }
+    },
+    {
+      "name": "安那其资本主义",
+      "desc": "你主张彻底废除国家，一切服务（包括警察法庭）私有化，由市场契约决定。",
+      "figures": "罗斯巴德、霍普",
+      "stats": { "econ": 100, "dipl": 50, "govt": 0, "scty": 20, "env": 90, "jus": 10 },
+      "books": ["《为了新的自由》", "《民主：也就是上帝失败了》", "《私有防务的生产》"],
+      "quote": {
+        "text": "The State is nothing more than a machine for the exploitation and domination of man by man.",
+        "trans": "国家不过是人剥削人、人统治人的机器。",
+        "author": "Murray Rothbard"
+      }
+    },
+    {
+      "name": "传统保守主义",
+      "desc": "你重视传统、等级、宗教、家庭和秩序，认为激进变革是危险的。",
+      "figures": "埃德蒙·伯克、俾斯麦",
+      "stats": { "econ": 60, "dipl": 70, "govt": 70, "scty": 90, "env": 50, "jus": 80 },
+      "books": ["《法国大革命反思录》", "《旧制度与大革命》", "《保守主义思想》"],
+      "quote": {
+        "text": "All that is necessary for the triumph of evil is that good men do nothing.",
+        "trans": "邪恶胜利的唯一必要条件是好人袖手旁观。",
+        "author": "Edmund Burke"
+      }
+    },
+    {
+      "name": "新保守主义",
+      "desc": "你对内主张保守，对外主张强力干涉，以此输出本国的价值观。",
+      "figures": "小布什、切尼",
+      "stats": { "econ": 70, "dipl": 10, "govt": 80, "scty": 70, "env": 80, "jus": 90 },
+      "books": ["《新保守主义的说服》", "《历史的终结》", "《权力的傲慢》"],
+      "quote": {
+        "text": "If we have to use force, it is because we are America; we are the indispensable nation.",
+        "trans": "如果我们必须使用武力，那是因为我们是美国；我们是不可或缺的国家。",
+        "author": "Madeleine Albright"
+      }
+    },
+    {
+      "name": "右翼民粹主义",
+      "desc": "你反对精英政治，反移民，强调本国优先和民族认同。",
+      "figures": "特朗普、勒庞",
+      "stats": { "econ": 60, "dipl": 90, "govt": 70, "scty": 80, "env": 80, "jus": 80 },
+      "books": ["《交易的艺术》", "《西方的自杀》", "《国家民粹主义》"],
+      "quote": {
+        "text": "Au nom du peuple.",
+        "trans": "以人民的名义。",
+        "author": "Marine Le Pen"
+      }
+    },
+    {
+      "name": "法西斯主义",
+      "desc": "你主张极端民族主义、极权统治、国家至上、统制经济。",
+      "figures": "墨索里尼、吉恩提尔",
+      "stats": { "econ": 50, "dipl": 100, "govt": 100, "scty": 100, "env": 40, "jus": 100 },
+      "books": ["《法西斯主义的教义》", "《我的奋斗》", "《钢铁的法则》"],
+      "quote": {
+        "text": "Tutto nello Stato, niente al di fuori dello Stato, nulla contro lo Stato.",
+        "trans": "一切在国家之内，没有东西在国家之外，没有东西反对国家。",
+        "author": "Benito Mussolini"
+      }
+    },
+    {
+      "name": "神权政治/原教旨主义",
+      "desc": "你认为国家应当以宗教经典为法律基础，政教合一。",
+      "figures": "霍梅尼、加尔文",
+      "stats": { "econ": 60, "dipl": 90, "govt": 100, "scty": 100, "env": 50, "jus": 100 },
+      "books": ["《伊斯兰政府：法学家的统治》", "《神学大全》", "《基督教要义》"],
+      "quote": {
+        "text": "Legem credendi lex statuat supplicandi.",
+        "trans": "祈祷的法则确立信仰的法则。",
+        "author": "Prosper of Aquitaine"
+      }
+    },
+    {
+      "name": "安那其共产主义",
+      "desc": "你主张废除国家、资本和等级，实行互助公社和直接民主。",
+      "figures": "克鲁泡特金、巴枯宁",
+      "stats": { "econ": 0, "dipl": 0, "govt": 0, "scty": 0, "env": 10, "jus": 0 },
+      "books": ["《面包的征服》", "《互助论》", "《上帝与国家》"],
+      "quote": {
+        "text": "La liberté des autres étend la mienne à l'infini.",
+        "trans": "他人的自由将我的自由无限延伸。",
+        "author": "Mikhail Bakunin"
+      }
+    },
+    {
+      "name": "互助论/左翼市场无政府",
+      "desc": "你反国家反资本，但保留市场交换和个人占有，主张工人自治。",
+      "figures": "普鲁东、本杰明·塔克",
+      "stats": { "econ": 30, "dipl": 10, "govt": 0, "scty": 10, "env": 30, "jus": 10 },
+      "books": ["《什么是所有权？》", "《贫困的哲学》", "《国家社会主义不是社会主义》"],
+      "quote": {
+        "text": "La propriété, c'est le vol!",
+        "trans": "财产就是盗窃！",
+        "author": "Pierre-Joseph Proudhon"
+      }
+    },
+    {
+      "name": "中间派/政治冷感",
+      "desc": "你对政治不感兴趣，只想烤肉（Griller），或者认为极左极右都不好。",
+      "figures": "普通路人",
+      "stats": { "econ": 50, "dipl": 50, "govt": 50, "scty": 50, "env": 50, "jus": 50 },
+      "books": ["《独自打保龄》", "《中庸之道》", "《烧烤圣经》"],
+      "quote": {
+        "text": "I just wanna grill for God's sake!",
+        "trans": "看在上帝份上，我只想好好烤肉！",
+        "author": "The Griller"
+      }
+    },
+    {
+      "name": "乔治主义 (地权共享)",
+      "desc": "你认为土地应归全社会共有，其他私有，主张征收单一地价税。",
+      "figures": "亨利·乔治、孙中山",
+      "stats": { "econ": 50, "dipl": 30, "govt": 30, "scty": 30, "env": 40, "jus": 40 },
+      "books": ["《进步与贫困》", "《社会问题》", "《土地问题》"],
+      "quote": {
+        "text": "The land belongs to the people, as the air belongs to the people.",
+        "trans": "土地属于人民，就像空气属于人民一样。",
+        "author": "Henry George"
+      }
+    },
+    {
+      "name": "加速主义",
+      "desc": "你主张激化现有社会矛盾，加速资本主义的异化和崩溃以迎来新生。",
+      "figures": "尼克·兰德、马克·费舍尔",
+      "stats": { "econ": 100, "dipl": 0, "govt": 10, "scty": 0, "env": 100, "jus": 20 },
+      "books": ["《Fanged Noumena》", "《资本主义现实主义》", "《加速主义宣言》"],
+      "quote": {
+        "text": "Nothing human makes it out of the near-future.",
+        "trans": "没有人类能活着走出不久的将来。",
+        "author": "Nick Land"
+      }
+    },
+    {
+      "name": "深绿生态主义",
+      "desc": "你认为生态系统优先于人类利益，甚至主张去工业化和人口控制。",
+      "figures": "泰德·卡辛斯基、阿恩·奈斯",
+      "stats": { "econ": 10, "dipl": 10, "govt": 60, "scty": 0, "env": 0, "jus": 40 },
+      "books": ["《工业社会及其未来》", "《寂静的春天》", "《深层生态学》"],
+      "quote": {
+        "text": "The industrial revolution and its consequences have been a disaster for the human race.",
+        "trans": "工业革命及其后果对人类来说是一场灾难。",
+        "author": "Ted Kaczynski"
+      }
+    },
+    {
+      "name": "技术官僚主义",
+      "desc": "你认为国家应由科学家和工程师管理，用数据和理性取代民主。",
+      "figures": "圣西门、马斯克",
+      "stats": { "econ": 40, "dipl": 20, "govt": 80, "scty": 10, "env": 30, "jus": 70 },
+      "books": ["《工程师与价格体系》", "《工业体系》", "《美丽新世界》"],
+      "quote": {
+        "text": "The machine process enforces a standardization of conduct and of knowledge.",
+        "trans": "机器过程强制执行行为和知识的标准化。",
+        "author": "Thorstein Veblen"
+      }
+    },
+    {
+      "name": "农业主义",
+      "desc": "你向往田园生活，认为农业是国家根本，反对过度城市化。",
+      "figures": "杰斐逊、文德尔·贝里",
+      "stats": { "econ": 40, "dipl": 80, "govt": 50, "scty": 80, "env": 20, "jus": 60 },
+      "books": ["《我要坚持我的立场》", "《汉密尔顿与杰斐逊》", "《未被开垦的土地》"],
+      "quote": {
+        "text": "Cultivators of the earth are the most valuable citizens.",
+        "trans": "土地的耕种者是最有价值的公民。",
+        "author": "Thomas Jefferson"
+      }
+    },
+    {
+      "name": "公社主义/民主邦联",
+      "desc": "你主张基于社区的直接民主，反对民族国家，强调生态与女权。",
+      "figures": "布克钦、奥贾兰",
+      "stats": { "econ": 10, "dipl": 10, "govt": 10, "scty": 0, "env": 10, "jus": 10 },
+      "books": ["《自由的生态学》", "《民主邦联主义》", "《城市化而不只是城市》"],
+      "quote": {
+        "text": "The domination of nature by man stems from the very real domination of human by human.",
+        "trans": "人对自然的统治源于人对人的真正统治。",
+        "author": "Murray Bookchin"
+      }
+    },
+    {
+      "name": "第三位置",
+      "desc": "你既反对共产主义也反对资本主义，主张一种超越左右的激进路线。",
+      "figures": "施特拉塞尔、庇隆",
+      "stats": { "econ": 40, "dipl": 80, "govt": 90, "scty": 60, "env": 40, "jus": 80 },
+      "books": ["《明日之德国》", "《正义主义》", "《超越资本主义与共产主义》"],
+      "quote": {
+        "text": "Wir sind Sozialisten, wir sind Feinde, tödliche Feinde des heutigen kapitalistischen Wirtschaftssystems.",
+        "trans": "我们是社会主义者，我们是今天资本主义经济制度的死敌。",
+        "author": "Gregor Strasser"
+      }
+    }
+  ]
+}
