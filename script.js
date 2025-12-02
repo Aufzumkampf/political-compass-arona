@@ -205,6 +205,9 @@ function renderResults() {
     // 3. 渲染阵营详情
     document.getElementById('ideology-name').innerText = bestMatch.name;
     document.getElementById('ideology-desc').innerText = bestMatch.desc;
+    // 👇 在这里添加这一行 👇
+    document.getElementById('ideology-figures').innerText = '🗿 代表人物：' + bestMatch.figures;
+
 
     // 名言
     const quoteBox = document.getElementById('ideology-quote');
