@@ -53,11 +53,21 @@
             <div id="options-container" class="options"></div>
             
             <!-- 操作区域 -->
-            <div class="quiz-actions">
-                <button class="btn btn-finish hidden" onclick="finishTest()" id="btn-finish-early">
-                    🏁 我已完成足够多的题目，直接看结果
-                </button>
-            </div>
+            <!-- 找到 id="quiz-screen" 下的 .quiz-actions 区域，替换为以下代码 -->
+
+<div class="quiz-actions">
+    <div class="action-buttons">
+        <!-- 新增：撤销按钮 -->
+        <button class="btn btn-secondary" onclick="prevQuestion()" id="btn-undo" disabled>
+            ↩ 撤销上一题
+        </button>
+        
+        <!-- 提前结束按钮 -->
+        <button class="btn btn-finish hidden" onclick="finishTest()" id="btn-finish-early">
+            🏁 已充分作答，提前看结果
+        </button>
+    </div>
+</div>
         </div>
 
         <!-- 3. 结果界面 -->
