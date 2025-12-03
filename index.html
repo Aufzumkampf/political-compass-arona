@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 政治光谱测试 (完整版)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header>
+            <h1>🗳️ 政治光谱测试</h1>
+            <p class="subtitle">Political Compass 2025: Ultimate Edition</p>
+        </header>
+
+        <!-- 1. 开始界面 -->
+        <div id="start-screen" class="card">
+            <h2>👋 欢迎参加测试</h2>
+            <p>基于多维政治坐标系的深度倾向测试。</p>
+            
+            <div class="intro-box">
+                <ul class="intro-list">
+                    <li>📊 <strong>5个核心维度</strong> (经济/外交/政治/社会/环境)</li>
+                    <li>🔀 <strong>50+道情景题</strong> (智能轮询发牌机制)</li>
+                    <li>⚖️ <strong>动态权重</strong> (每个选项影响多个维度)</li>
+                    <li>🏁 <strong>弹性机制</strong> (充分表达后可提前结束)</li>
+                </ul>
+            </div>
+            
+            <br>
+            <button class="btn btn-primary" id="start-btn" onclick="startTest()" disabled>数据加载中...</button>
+            <p id="loading-msg" style="font-size: 0.8rem; color: #999; margin-top: 5px;">正在读取 data.json...</p>
+        </div>
+
+        <!-- 2. 答题界面 -->
+        <div id="quiz-screen" class="card hidden">
+            <div class="header-bar">
+                <div class="category-badge" id="q-category">加载中</div>
+                <div class="progress-text"><span id="q-progress">0</span> / ~50</div>
+            </div>
+            
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+            
+            <h3 id="question-text">题目加载中...</h3>
+            
+            <div id="options-container" class="options">
+                <!-- 选项卡片由 JS 生成 -->
+            </div>
+            
+            <div class="quiz-actions">
+                <!-- 提前结束按钮 -->
+                <button class="btn btn-finish hidden" onclick="finishTest()" id="btn-finish-early">
+                    🏁 我已完成足够多的题目，直接看结果
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. 结果界面 -->
+        <div id="result-screen" class="card hidden">
+            <h2>📊 测试结果报告</h2>
+            <p>根据您的回答，您的政治立场最接近：</p>
+            
+            <!-- 匹配结果列表 -->
+            <div id="top-matches-container"></div>
+
+            <hr class="divider">
+
+            <!-- 维度分析图 -->
+            <h3>维度倾向分析</h3>
+            <div id="axes-results"></div>
+
+            <div class="result-actions">
+                <button class="btn btn-primary" onclick="location.reload()">🔄 重新测试</button>
+            </div>
+        </div>
+
+        <!-- 4. 详情弹窗 -->
+        <div id="detail-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeDetail()">&times;</span>
+                
+                <div class="modal-header">
+                    <h2 id="modal-title">阵营名称</h2>
+                </div>
+                
+                <div class="modal-body">
+                    <p id="modal-desc" class="modal-text"></p>
+                    
+                    <div class="info-grid">
+                        <div class="info-section">
+                            <h4>🗿 代表人物</h4>
+                            <!-- 现在支持数组标签显示 -->
+                            <div id="modal-figures" class="tag-container"></div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>📚 推荐书籍</h4>
+                            <ul id="modal-books" class="book-list"></ul>
+                        </div>
+                    </div>
+
+                    <div class="info-section full-width">
+                        <h4>📜 经典名言</h4>
+                        <div id="modal-quote" class="quote-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Powered by Political Compass Engine</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
