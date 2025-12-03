@@ -20,8 +20,9 @@
             <p>欢迎来到 2025 版政治光谱测试。</p>
             <ul class="rules">
                 <li>包含 <strong>6大维度</strong> 分析</li>
-                <li>基础测试 <strong>100题</strong></li>
-                <li>可选进阶 <strong>+50题</strong> (深水区)</li>
+                <li><strong>全新情景化题目</strong>，告别简单的是非判断</li>
+                <li>问题顺序<strong>完全随机</strong>，每次都是新体验</li>
+                <li>在您充分表达观点后可<strong>提前结束</strong></li>
             </ul>
             <button class="btn btn-primary" onclick="startTest()">开始测试 Mission Start!</button>
         </div>
@@ -29,7 +30,7 @@
         <!-- 答题页 -->
         <div id="quiz-screen" class="card hidden">
             <div class="progress-container">
-                <div class="progress-label">进度: <span id="q-progress">0</span> / <span id="q-total">100</span></div>
+                <div class="progress-label">进度: <span id="q-progress">0</span> / <span id="q-total">~150</span></div>
                 <div class="progress-bar-bg">
                     <div id="progress-bar" class="progress-bar-fill"></div>
                 </div>
@@ -37,25 +38,13 @@
             
             <h3 id="question-text">题目加载中...</h3>
             
-            <div class="options">
-                <button class="btn btn-option" onclick="answer('a')">强烈同意 (Strongly Agree)</button>
-                <button class="btn btn-option" onclick="answer('b')">同意 (Agree)</button>
-                <button class="btn btn-option" onclick="answer('c')">中立/不确定 (Neutral)</button>
-                <button class="btn btn-option" onclick="answer('d')">反对 (Disagree)</button>
-                <button class="btn btn-option" onclick="answer('e')">强烈反对 (Strongly Disagree)</button>
+            <!-- 新的选项容器 -->
+            <div id="options-container" class="options">
             </div>
             
-            <button class="btn btn-small" onclick="prevQuestion()" id="btn-undo" disabled>↩ 撤销上一题</button>
-        </div>
-
-        <!-- 中途结算页 (100题节点) -->
-        <div id="inter-screen" class="card hidden">
-            <h2>🎉 基础测试完成！</h2>
-            <p>老师，您已经完成了前 100 题。</p>
-            <p>您可以查看当前结果，或者<strong>加大力度</strong>进入包含极端哲学问题的“深水区”。</p>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="finishTest()">就在这里结算</button>
-                <button class="btn btn-danger" onclick="enterExtendedMode()">🔥 加大力度 (+50题)</button>
+            <div class="quiz-actions">
+                <button class="btn btn-small" onclick="prevQuestion()" id="btn-undo" disabled>↩ 撤销上一题</button>
+                <button class="btn btn-small btn-finish hidden" onclick="finishTest()" id="btn-finish-early">🏁 已充分作答，提前看结果</button>
             </div>
         </div>
 

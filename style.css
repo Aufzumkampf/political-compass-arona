@@ -1,291 +1,43 @@
-:root {
-    --bg-color: #f0f4f8;
-    --card-bg: #ffffff;
-    --primary: #00A1D6; /* 阿罗娜蓝 */
-    --primary-hover: #008bb8;
-    --text-main: #333;
-    --text-sub: #666;
-    --red: #ff4d4f;
-    --blue: #1890ff;
-}
-
-body {
-    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-.container {
-    width: 100%;
-    max-width: 600px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.subtitle {
-    color: var(--text-sub);
-    font-size: 0.9rem;
-}
-
-.card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* 🔥 修复点：加上 !important 强制隐藏 */
-.hidden {
-    display: none !important;
-}
-
-/* 按钮样式 */
-.btn {
-    border: none;
+/* 选项卡片样式 */
+.option-card {
+    background: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 1rem;
+    padding: 15px;
+    margin-bottom: 12px;
     cursor: pointer;
     transition: all 0.2s;
-    margin: 5px;
-    display: inline-block;
-}
-
-.btn-primary {
-    background-color: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-}
-
-.btn-option {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    background-color: #f5f5f5;
-    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.5;
     text-align: left;
-    padding-left: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.btn-option:hover {
+.option-card:hover {
     background-color: #e6f7ff;
-    color: var(--primary);
-}
-
-.btn-danger {
-    background-color: var(--red);
-    color: white;
-}
-
-.btn-secondary {
-    background-color: #eee;
-    color: #333;
-}
-
-.btn-small {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    background: transparent;
-    color: var(--text-sub);
-}
-
-/* 进度条 */
-.progress-container {
-    margin-bottom: 20px;
-}
-
-.progress-label {
-    font-size: 0.8rem;
-    color: var(--text-sub);
-    margin-bottom: 5px;
-    text-align: right;
-}
-
-.progress-bar-bg {
-    height: 8px;
-    background-color: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background-color: var(--primary);
-    width: 0%;
-    transition: width 0.3s ease;
-}
-
-/* 结果页图表 */
-.axis-container {
-    margin: 20px 0;
-    text-align: left;
-}
-
-.axis-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.bar-wrapper {
-    display: flex;
-    height: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #eee;
-}
-
-.bar-left {
-    background-color: var(--blue);
-    height: 100%;
-}
-
-.bar-right {
-    background-color: var(--red);
-    height: 100%;
-}
-
-.axis-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--text-sub);
-    margin-top: 4px;
-}
-
-.quote-box {
-    background-color: #fffbe6;
-    border-left: 4px solid #ffe58f;
-    padding: 15px;
-    margin: 20px 0;
-    font-style: italic;
-    text-align: left;
-}
-
-.book-box {
-    text-align: left;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-/* Top 3 匹配卡片 */
-.match-card {
-    background: #f8f9fa;
-    border: 2px solid transparent;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.match-card:hover {
-    border-color: var(--primary);
+    border-color: #1890ff;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.match-card.rank-1 {
-    background: #e6f7ff;
-    border-color: var(--primary);
+.option-card:active {
+    background-color: #bae7ff;
 }
 
-.match-info h3 {
-    margin: 0 0 5px 0;
+#question-text {
     font-size: 1.1rem;
-}
-
-.match-pct {
     font-weight: bold;
-    font-size: 1.2rem;
-    color: var(--primary);
-}
-
-.rank-1 .match-pct { color: #d32f2f; }
-
-/* 弹窗样式 */
-.modal {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: flex; /* 注意：这里定义了 display: flex */
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.close-btn:hover { color: #000; }
-
-.modal-text {
-    line-height: 1.6;
-    text-align: justify;
     margin-bottom: 20px;
+    line-height: 1.6;
+    color: #222;
 }
 
-.info-section {
-    margin-top: 20px;
-    text-align: left;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-}
-
-.info-section h4 {
-    color: var(--primary);
+#q-category {
+    display: inline-block;
+    background: #eee;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #666;
     margin-bottom: 10px;
 }
