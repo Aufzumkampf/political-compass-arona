@@ -44,8 +44,9 @@ header {
     text-align: center;
 }
 
+/* 🔥 修复点：加上 !important 强制隐藏 */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* 按钮样式 */
@@ -185,6 +186,7 @@ header {
 ul {
     padding-left: 20px;
 }
+
 /* Top 3 匹配卡片 */
 .match-card {
     background: #f8f9fa;
@@ -223,7 +225,7 @@ ul {
     color: var(--primary);
 }
 
-.rank-1 .match-pct { color: #d32f2f; } /* 第一名红色高亮 */
+.rank-1 .match-pct { color: #d32f2f; }
 
 /* 弹窗样式 */
 .modal {
@@ -234,7 +236,7 @@ ul {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
-    display: flex;
+    display: flex; /* 注意：这里定义了 display: flex */
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(5px);
