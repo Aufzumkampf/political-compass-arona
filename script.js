@@ -230,13 +230,18 @@ function updateUndoButtonState() {
 
 // ================= 计算逻辑 =================
 
+// ================= 实时监视与计算 =================
+
 function updateLiveMonitor() {
     const monitor = document.getElementById('live-monitor');
     const matchName = document.getElementById('live-match-name');
 
-    const totalAnswered = Object.values(answeredCounts).reduce((a,b)=>a+b, 0);
+    // 🔴 核心修复：
+    // 原来的逻辑： totalAnswered > 0 (答一题就显示)
+    // 现在的逻辑： categories.every(...) (必须每个分类都至少答过 1 题)
+    const isReady = categories.length > 0 && categories.every(cat => answeredCounts[cat] > 0);
 
-    if (totalAnswered > 0) {
+    if (isReady) {
         const best = getBestMatch();
         if (best) {
             const icon = best.icon ? best.icon + ' ' : '';
