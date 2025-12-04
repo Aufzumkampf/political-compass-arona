@@ -1,5 +1,5 @@
 /**
- * 2025 Political Compass Logic Script (Final Stable)
+ * 2025 Political Compass Logic Script (Final Fix: Variable Scope)
  */
 
 let DB = null;
@@ -23,13 +23,16 @@ window.onload = async () => {
         const btn = document.getElementById('start-btn');
         if(btn) {
             btn.disabled = false;
-            btn.innerText = "开始测试";
+            btn.innerText = "开始测试 Mission Start!";
         }
         document.getElementById('loading-msg').style.display = 'none';
         initGame();
     } catch (e) {
-        alert("错误：无法加载数据文件。\n请确保使用本地服务器运行 (localhost)。");
-        console.error(e);
+        // 忽略 content.js 的插件错误，只处理关键错误
+        if (!e.message.includes("message port")) {
+            alert("错误：无法加载数据文件。\n请确保使用本地服务器运行 (localhost)。");
+            console.error(e);
+        }
     }
 };
 
@@ -71,7 +74,6 @@ function showScreen(id) {
     document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
     
-    // 控制头部显示
     const header = document.querySelector('header');
     if (header) {
         if (id === 'start-screen') header.classList.remove('hidden');
@@ -86,13 +88,9 @@ function startTest() {
     loadNextQuestion();
 }
 
-// 打开图鉴页
 function openGallery() {
     const container = document.getElementById('gallery-container');
-    if (!container) {
-        console.error("找不到 gallery-container，请检查 index.html");
-        return;
-    }
+    if (!container) return;
     container.innerHTML = ''; 
 
     DB.ideologies.forEach((ideo, index) => {
@@ -283,6 +281,8 @@ function finishTest() {
 function renderResults() {
     const { matches, userStats } = getSortedMatches();
     topMatches = matches.slice(0, 3);
+    
+    // 渲染维度条 (使用 userStats)
     renderAxesCharts(userStats);
     
     const container = document.getElementById('top-matches-container');
@@ -313,20 +313,59 @@ function renderResults() {
     });
 }
 
-function renderAxesCharts(userStats) {
+// 🔴 修复：这里必须使用参数传进来的 stats，而不是 data
+function renderAxesCharts(stats) {
     const container = document.getElementById('axes-results');
     container.innerHTML = '';
-    // 遍历5个维度 (修复版)
+    for(let axis in DB.meta.axes) {
+        const meta = DB.meta.axes[axis];
+        // 使用参数 stats (即 userStats)
+        const val = stats[axis]; 
+        const pctRight = (val + 100) / 2;
+        const pctLeft = 100 - pctRight;
+        
+        container.innerHTML += `
+            <div class="axis-row">
+                <div class="axis-header">
+                    <span>${meta.left} <span class="pct-val">${pctLeft.toFixed(1)}%</span></span>
+                    <span class="axis-name">${meta.name}</span>
+                    <span><span class="pct-val">${pctRight.toFixed(1)}%</span> ${meta.right}</span>
+                </div>
+                <div class="axis-bar-bg">
+                    <div class="axis-bar-left" style="width: ${pctLeft}%"></div>
+                    <div class="axis-bar-right" style="width: ${pctRight}%"></div>
+                    <div class="axis-marker" style="left: ${pctLeft}%"></div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// ================= 详情弹窗 (修正了变量名) =================
+
+function showDetail(identifier, mode) {
+    let data = null;
+    if (mode === 'result') data = topMatches[identifier];
+    else data = DB.ideologies[identifier];
+    
+    if (!data) return;
+    
+    const iconHtml = data.icon ? data.icon + ' ' : '';
+    document.getElementById('modal-title').innerText = iconHtml + data.name;
+    document.getElementById('modal-desc').innerText = data.desc;
+    
+    // 渲染维度小条 (这里才使用 data.stats)
+    const statsContainer = document.getElementById('modal-stats-bar');
+    statsContainer.innerHTML = '';
+    
     for(let axis in DB.meta.axes) {
         const meta = DB.meta.axes[axis];
         let val = data.stats[axis] || 0; 
-        
         let color = val >= 0 ? 'var(--accent-red)' : 'var(--accent-blue)';
         let width = Math.abs(val) / 2; 
         let leftPos = val >= 0 ? '50%' : `${50 - width}%`;
         let pctText = Math.abs(val) + '%';
-
-        // 新的 HTML 结构：标题在上一行，进度条在下一行，数字在进度条中间
+        
         statsContainer.innerHTML += `
             <div class="mini-stat-row">
                 <div class="mini-stat-header">
@@ -343,54 +382,6 @@ function renderAxesCharts(userStats) {
             </div>
         `;
     }
-}
-
-// ================= 详情弹窗 (含百分比修复) =================
-
-function showDetail(identifier, mode) {
-    let data = null;
-    if (mode === 'result') data = topMatches[identifier];
-    else data = DB.ideologies[identifier];
-    
-    if (!data) return;
-    
-    const iconHtml = data.icon ? data.icon + ' ' : '';
-    document.getElementById('modal-title').innerText = iconHtml + data.name;
-    document.getElementById('modal-desc').innerText = data.desc;
-    
-// ... 前面的代码 ...
-    const statsContainer = document.getElementById('modal-stats-bar');
-    statsContainer.innerHTML = '';
-    
-    for(let axis in DB.meta.axes) {
-        const meta = DB.meta.axes[axis];
-        let val = data.stats[axis] || 0; 
-        
-        let color = val >= 0 ? 'var(--accent-red)' : 'var(--accent-blue)';
-        let width = Math.abs(val) / 2; // 0~100 映射到 0~50%
-        let leftPos = val >= 0 ? '50%' : `${50 - width}%`;
-        let pctText = Math.abs(val) + '%';
-        
-        // 气泡的位置：跟随进度条的末端，或者固定在中间
-        // 这里我们让气泡跟随进度条末端，看起来更动态
-        let bubblePos = val >= 0 ? `calc(50% + ${width}%)` : `calc(50% - ${width}%)`;
-
-        statsContainer.innerHTML += `
-            <div class="mini-stat-row">
-                <div class="mini-stat-header">
-                    <span class="mini-label left">${meta.left}</span>
-                    <span class="mini-label right">${meta.right}</span>
-                </div>
-                <div class="mini-bar-container">
-                    <div class="axis-marker" style="left: 50%; width: 2px; background: #fff; z-index: 2;"></div>
-                    <div class="mini-bar-fill" style="left: ${leftPos}; width: ${width}%; background: ${color};"></div>
-                    <!-- 数值气泡 -->
-                    <div class="mini-bar-value" style="left: ${bubblePos};">${pctText}</div>
-                </div>
-            </div>
-        `;
-    }
-    // ... 后面的代码 ...
 
     const formatTags = (items) => Array.isArray(items) ? items.map(i => `<span class="figure-tag">${i}</span>`).join('') : items;
     document.getElementById('modal-figures').innerHTML = formatTags(data.figures);
