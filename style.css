@@ -179,7 +179,7 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
 }
 .option-card:active { transform: scale(0.98); }
 
-/* 结果页 - 冠军卡片 */
+/* 结果页 - 冠军卡片 (PC端默认) */
 .result-header { margin-bottom: 20px; }
 .result-badge { 
     background: #e1f0fa; color: var(--primary); 
@@ -211,7 +211,7 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
     font-size: 0.9rem;
 }
 
-/* 冠军卡片内部布局类 (新加) */
+/* PC端布局：左右结构 */
 .best-header-container {
     display: flex;
     justify-content: space-between;
@@ -219,6 +219,8 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
     margin-bottom: 15px;
 }
 .best-title { margin: 0; display: flex; align-items: center; font-size: 2rem; color: var(--text-main); }
+.best-title span { margin-right: 10px; font-size: 2.5rem; } /* PC端图标 */
+
 .match-score-box { text-align: right; }
 .score-val { font-size: 1.8rem; color: var(--primary); font-weight: bold; }
 .score-label { font-size: 0.8rem; color: #999; }
@@ -327,70 +329,85 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
 .quote-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px; }
 
 /* =========================================
-   手机端深度优化 (Mobile Optimization)
+   📱 手机端深度重构 (Mobile Optimization)
+   解决：臃肿、错位、间距过大
    ========================================= */
 @media (max-width: 600px) {
-    /* 容器调整 */
+    /* 1. 紧凑化容器 */
+    .container { padding: 10px; }
     .card { padding: 20px 15px !important; margin-bottom: 15px; }
     
-    /* 字体缩小 */
-    header h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.3rem; }
+    /* 2. 字体瘦身 */
+    header h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
     h3 { font-size: 1.1rem; }
     
-    /* 冠军卡片垂直布局重构 */
-    .best-match-card { padding: 20px 15px !important; text-align: center !important; }
+    /* 3. 冠军卡片：强制垂直居中布局 */
+    .best-match-card {
+        padding: 25px 15px !important;
+        text-align: center !important;
+    }
     
-    /* 头部容器变垂直 */
+    /* 头部容器：上下排列 */
     .best-header-container {
         flex-direction: column !important;
-        margin-bottom: 20px !important;
-    }
-    
-    /* 标题区域 */
-    .best-title {
-        font-size: 1.5rem !important;
-        line-height: 1.3 !important;
-        margin-bottom: 10px !important;
-        flex-direction: column !important; /* 图标文字垂直 */
         justify-content: center !important;
-        text-align: center !important;
-        white-space: normal !important;
+        align-items: center !important;
+        margin-bottom: 15px !important;
     }
     
-    /* 图标放大 */
+    /* 标题区域：强制换行 */
+    .best-title {
+        display: flex !important;
+        flex-direction: column !important; /* 图标在上，文字在下 */
+        font-size: 1.4rem !important; /* 缩小标题 */
+        line-height: 1.3 !important;
+        margin-bottom: 15px !important;
+        text-align: center !important;
+        white-space: normal !important; /* 允许换行 */
+    }
+    
+    /* 图标放大且居中 */
     .best-title span {
-        font-size: 3rem !important;
+        font-size: 4rem !important; /* 图标大大大 */
         margin-right: 0 !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 10px !important; /* 图标和文字间距 */
         display: block !important;
     }
     
-    /* 分数区域优化 */
+    /* 分数胶囊：居中显示 */
     .match-score-box {
         text-align: center !important;
-        margin-top: 5px;
+        margin: 0 auto !important;
         background: #f0f9ff;
-        padding: 5px 15px;
-        border-radius: 20px;
-        width: fit-content;
-        margin: 0 auto; /* 居中 */
+        padding: 8px 20px !important;
+        border-radius: 30px;
+        width: fit-content !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .score-val { font-size: 1.4rem !important; }
+    .score-val { font-size: 1.6rem !important; display: block; line-height: 1; }
+    .score-label { font-size: 0.8rem; margin-top: 3px; }
     
-    /* 描述文字 */
-    .best-desc { text-align: justify !important; font-size: 0.95rem !important; }
+    /* 描述文字：两端对齐 */
+    .best-desc {
+        text-align: justify !important;
+        font-size: 0.95rem !important;
+        margin-top: 20px;
+    }
     
-    /* 信息网格变单列 */
+    /* 信息网格：变为单列 */
     .best-info-grid, .info-grid {
         grid-template-columns: 1fr !important;
-        gap: 15px !important;
+        gap: 20px !important;
         text-align: left !important;
     }
     
-    /* 实时监视器 */
-    .live-feedback { font-size: 0.85rem; padding: 6px 10px; }
+    /* 实时监视器：更紧凑 */
+    .live-feedback { font-size: 0.85rem; padding: 8px; }
     
-    /* 亚季军卡片 */
-    #sub-matches-container { grid-template-columns: 1fr !important; } /* 单列显示 */
+    /* 亚季军卡片：变为单列 */
+    #sub-matches-container { grid-template-columns: 1fr !important; }
+    
+    /* 选项卡片：文字稍微调小 */
+    .option-card { font-size: 0.95rem; padding: 15px; }
 }
