@@ -330,11 +330,11 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
 
 /* =========================================
    📱 手机端深度重构 (Mobile Optimization)
-   解决：臃肿、错位、间距过大
+   解决：臃肿、错位、间距过大、契合度占用空间过多
    ========================================= */
 @media (max-width: 600px) {
     /* 1. 紧凑化容器 */
-    .container { padding: 10px; }
+    .container { padding: 10px; width: 95%; }
     .card { padding: 20px 15px !important; margin-bottom: 15px; }
     
     /* 2. 字体瘦身 */
@@ -342,63 +342,84 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
     h2 { font-size: 1.2rem; }
     h3 { font-size: 1.1rem; }
     
-    /* 3. 冠军卡片：强制垂直居中布局 */
+    /* 3. 冠军卡片：强制垂直布局 */
     .best-match-card {
-        padding: 25px 15px !important;
+        padding: 20px 15px !important;
         text-align: center !important;
     }
     
-    /* 头部容器：上下排列 */
+    /* 头部容器：上下排列，极小间距 */
     .best-header-container {
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
         margin-bottom: 15px !important;
+        gap: 5px !important; /* 🔴 关键：减小各元素间距 */
     }
     
-    /* 标题区域：强制换行 */
+    /* 标题区域 */
     .best-title {
         display: flex !important;
         flex-direction: column !important; /* 图标在上，文字在下 */
-        font-size: 1.4rem !important; /* 缩小标题 */
-        line-height: 1.3 !important;
-        margin-bottom: 15px !important;
+        font-size: 1.5rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 5px !important; /* 🔴 减小标题下边距 */
         text-align: center !important;
-        white-space: normal !important; /* 允许换行 */
+        white-space: normal !important;
     }
     
-    /* 图标放大且居中 */
+    /* 图标优化：稍微调小腾出空间 */
     .best-title span {
-        font-size: 4rem !important; /* 图标大大大 */
+        font-size: 3.5rem !important; /* 🔴 从 4rem 改为 3.5rem */
         margin-right: 0 !important;
-        margin-bottom: 10px !important; /* 图标和文字间距 */
+        margin-bottom: 5px !important; /* 🔴 减小图标下边距 */
         display: block !important;
     }
     
-    /* 分数胶囊：居中显示 */
+    /* ====================================
+       🔴 核心优化：分数区域变为【横向】紧凑型
+       ==================================== */
     .match-score-box {
+        display: flex !important;          /* 启用 Flex */
+        flex-direction: row !important;    /* 🔴 改为横向排列 */
+        align-items: baseline !important;  /* 文字基线对齐 */
+        justify-content: center !important;
+        gap: 8px !important;               /* 数字和文字的间距 */
+        
         text-align: center !important;
-        margin: 0 auto !important;
+        margin: 5px auto 0 auto !important;
         background: #f0f9ff;
-        padding: 8px 20px !important;
-        border-radius: 30px;
+        border: 1px solid #d6eaf8;         /* 加上细边框增加精致感 */
+        padding: 4px 15px !important;      /* 🔴 大幅减小内边距 */
+        border-radius: 8px !important;     /* 🔴 变小圆角，不再是圆润大胶囊 */
         width: fit-content !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        box-shadow: none !important;       /* 去掉阴影，扁平化 */
     }
-    .score-val { font-size: 1.6rem !important; display: block; line-height: 1; }
-    .score-label { font-size: 0.8rem; margin-top: 3px; }
+    
+    .score-val { 
+        font-size: 1.2rem !important;      /* 🔴 数字变小 */
+        display: inline-block !important;
+        line-height: 1 !important;
+    }
+    
+    .score-label { 
+        font-size: 0.85rem !important; 
+        margin-top: 0 !important;          /* 去掉顶部间距 */
+        color: #666 !important;
+    }
     
     /* 描述文字：两端对齐 */
     .best-desc {
         text-align: justify !important;
         font-size: 0.95rem !important;
-        margin-top: 20px;
+        margin-top: 15px;
+        line-height: 1.6;
     }
     
     /* 信息网格：变为单列 */
     .best-info-grid, .info-grid {
         grid-template-columns: 1fr !important;
-        gap: 20px !important;
+        gap: 15px !important;
         text-align: left !important;
     }
     
