@@ -1,5 +1,5 @@
 /**
- * 2025 Political Compass Logic Script (Skip Fixed)
+ * 2025 Political Compass Logic Script (Final Stable with Chart Fix)
  */
 
 let DB = null;
@@ -39,7 +39,6 @@ function initGame() {
     currentQuestionData = null;
     currentSelectedEffects = [];
     
-    // 1. 初始化普通题库
     categories.forEach(cat => {
         if(DB.questions[cat]) {
             availableQuestions[cat] = [...DB.questions[cat]];
@@ -50,7 +49,6 @@ function initGame() {
         answeredCounts[cat] = 0;
     });
 
-    // 2. 初始化综合题库
     if (DB.questions["comprehensive"]) {
         specialQuestions = [...DB.questions["comprehensive"]];
         specialQuestions.sort(() => Math.random() - 0.5);
@@ -64,7 +62,6 @@ function initGame() {
         maxScores[axis] = 0;
     }
     
-    // 3. 计算总题数
     let realTotal = 0;
     categories.forEach(cat => { 
         if (DB.questions[cat]) realTotal += DB.questions[cat].length; 
@@ -74,7 +71,6 @@ function initGame() {
     const totalEl = document.getElementById('q-total');
     if(totalEl) totalEl.innerText = realTotal;
 
-    // 4. 计算标记位置
     const thresholdPerCat = DB.meta.question_logic.questions_per_category_before_skip; 
     const catCount = categories.length; 
     const standardRequired = thresholdPerCat * catCount; 
@@ -94,7 +90,6 @@ function initGame() {
     updateLiveMonitor();
 }
 
-// ================= 导航 =================
 function showScreen(id) {
     document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
@@ -130,7 +125,6 @@ function openGallery() {
 
 function backToStart() { showScreen('start-screen'); }
 
-// ================= 答题逻辑 =================
 function loadNextQuestion() {
     let standardAnsweredTotal = 0;
     categories.forEach(cat => { standardAnsweredTotal += answeredCounts[cat]; });
@@ -138,7 +132,6 @@ function loadNextQuestion() {
     let expectedCompCount = Math.floor(standardAnsweredTotal / 10);
     let currentCompCount = answeredCounts['comprehensive'];
 
-    // 插入综合题逻辑
     if (expectedCompCount > currentCompCount && specialQuestions.length > 0) {
         const question = specialQuestions.pop();
         currentQuestionData = { question, category: 'comprehensive', isMulti: true };
@@ -171,7 +164,7 @@ function renderQuestion(question, category) {
     catEl.className = `category-badge cat-${category === 'comprehensive' ? 'governance' : category}`;
     
     let text = question.text;
-    if (category === 'comprehensive') text += "（可多选）";
+    if (category === 'comprehensive') text += "（多选题）";
     document.getElementById('question-text').innerText = text;
     
     const container = document.getElementById('options-container');
@@ -191,29 +184,24 @@ function renderQuestion(question, category) {
         container.appendChild(btn);
     });
     
-    // 🟢 修复：多选题现在也显示跳过按钮
     const skipBtn = document.getElementById('btn-skip');
-    skipBtn.classList.remove('hidden');
-    updateSkipButtonState(category);
+    if (category === 'comprehensive') {
+        // 综合题允许跳过
+        skipBtn.classList.remove('hidden');
+        skipBtn.disabled = false;
+        skipBtn.innerText = "⏭️ 跳过此题";
+    } else {
+        skipBtn.classList.remove('hidden');
+        updateSkipButtonState(category);
+    }
 
     updateProgress();
     checkSkipCondition();
     updateUndoButtonState();
 }
 
-// 🟢 修复：更新跳过按钮可用状态（兼容综合题）
 function updateSkipButtonState(category) {
     const skipBtn = document.getElementById('btn-skip');
-    
-    // 如果是综合题，默认允许跳过 (除非你想强制回答)
-    if (category === 'comprehensive') {
-        skipBtn.disabled = false;
-        skipBtn.title = "";
-        skipBtn.innerText = "⏭️ 跳过此题";
-        return;
-    }
-
-    // 普通题目的原有逻辑
     const threshold = DB.meta.question_logic.questions_per_category_before_skip; 
     const currentAnswered = answeredCounts[category];
     const remainingInPool = availableQuestions[category].length;
@@ -222,7 +210,7 @@ function updateSkipButtonState(category) {
     if (potentialTotal <= threshold) {
         skipBtn.disabled = true;
         skipBtn.title = "本类别题目数量不足，无法跳过";
-        skipBtn.innerText = "🚫 无法跳过 (题量紧缺)";
+        skipBtn.innerText = "🚫 无法跳过";
     } else {
         skipBtn.disabled = false;
         skipBtn.title = "";
@@ -230,11 +218,8 @@ function updateSkipButtonState(category) {
     }
 }
 
-// 执行跳过逻辑
 window.skipQuestion = function() {
     if (!currentQuestionData) return;
-    
-    // 记录历史，类型为 'skip'
     historyStack.push({
         question: currentQuestionData.question,
         category: currentQuestionData.category,
@@ -242,8 +227,6 @@ window.skipQuestion = function() {
         isMulti: (currentQuestionData.category === 'comprehensive'),
         actionType: 'skip'
     });
-    
-    // 跳过不计分，也不增加 answeredCounts
     loadNextQuestion();
 }
 
@@ -296,7 +279,6 @@ function prevQuestion() {
     if (historyStack.length === 0) return;
     const lastAction = historyStack.pop();
     
-    // 如果是回答操作，回滚分数
     if (lastAction.actionType === 'answer' || !lastAction.actionType) { 
         for (let axis in lastAction.effects) {
             scores[axis] -= lastAction.effects[axis];
@@ -305,14 +287,12 @@ function prevQuestion() {
         answeredCounts[lastAction.category]--;
     }
 
-    // 题目回流
     if (currentQuestionData) {
         if (currentQuestionData.category === 'comprehensive') specialQuestions.push(currentQuestionData.question);
         else availableQuestions[currentQuestionData.category].push(currentQuestionData.question);
     }
 
     currentQuestionData = { question: lastAction.question, category: lastAction.category };
-    // 如果上一题不是综合题，才重置轮询索引
     if (lastAction.category !== 'comprehensive') {
         const idx = categories.indexOf(lastAction.category);
         if(idx !== -1) currentCategoryIndex = (idx + 1) % categories.length;
@@ -338,10 +318,8 @@ function updateProgress() {
     let totalAnswered = Object.values(answeredCounts).reduce((a,b)=>a+b, 0);
     const totalEl = document.getElementById('q-total');
     const realTotal = totalEl ? parseInt(totalEl.innerText) : 100;
-    
     const progEl = document.getElementById('q-progress');
     if(progEl) progEl.innerText = totalAnswered;
-    
     const pct = Math.min(100, (totalAnswered / realTotal) * 100);
     document.getElementById('progress-bar').style.width = `${pct}%`;
     
@@ -429,7 +407,6 @@ function renderResults() {
         let rankClass = idx === 0 ? 'rank-gold' : (idx === 1 ? 'rank-silver' : 'rank-bronze');
         let icon = idx === 0 ? '🥇' : (idx === 1 ? '🥈' : '🥉');
         let ideoIcon = m.icon ? m.icon : '';
-
         let displayName = m.name;
         let subName = "";
         if (m.name.includes('(')) {
@@ -484,6 +461,7 @@ function renderAxesCharts(userStats) {
     }
 }
 
+// 🔴 核心修复：弹窗内的微型维度条渲染逻辑
 function showDetail(identifier, mode) {
     let data = null;
     if (mode === 'result') data = topMatches[identifier];
@@ -499,31 +477,38 @@ function showDetail(identifier, mode) {
     const statsContainer = document.getElementById('modal-stats-bar');
     statsContainer.innerHTML = '';
     
+    // 遍历并渲染维度条 (使用 Grid 布局适配)
     for(let axis in DB.meta.axes) {
         const meta = DB.meta.axes[axis];
         let val = data.stats[axis] || 0; 
+        
+        // 样式计算
         let color = val >= 0 ? 'var(--accent-red)' : 'var(--accent-blue)';
         let width = Math.abs(val) / 2; 
         let leftPos = val >= 0 ? '50%' : `${50 - width}%`;
         let pctText = Math.abs(val) + '%';
         
+        // 文字位置计算 (绝对定位)
         let textStyle = val >= 0 
-            ? `left: ${50 + width + 2}%; text-align: left; color: var(--accent-red);` 
-            : `right: ${50 + width + 2}%; text-align: right; color: var(--accent-blue);`;
-        
-        if (Math.abs(val) < 5) {
-            textStyle = `left: 50%; transform: translateX(-50%); color: #999; bottom: 8px; font-size: 0.6rem;`;
+            ? `left: calc(50% + ${width}% + 5px); color: ${color};` 
+            : `right: calc(50% + ${width}% + 5px); color: ${color};`;
+            
+        // 极小值特殊处理
+        if (Math.abs(val) < 10) {
+            textStyle = `left: 50%; transform: translateX(-50%); color: #999; top: -18px;`;
         }
 
         statsContainer.innerHTML += `
-            <div class="mini-stat-row" style="position: relative; margin-bottom: 8px;">
-                <span class="mini-label left">${meta.left}</span>
-                <div class="mini-bar-bg">
-                    <div class="axis-marker" style="left: 50%; opacity: 0.3;"></div>
+            <div class="mini-stat-row">
+                <div class="mini-label left">${meta.left}</div>
+                
+                <div class="mini-bar-container">
+                    <div style="position:absolute; left:50%; top:0; bottom:0; width:2px; background:#fff; z-index:2;"></div>
                     <div class="mini-bar-fill" style="left: ${leftPos}; width: ${width}%; background: ${color};"></div>
-                    <span style="position: absolute; top: -1px; font-size: 0.7rem; font-weight: bold; ${textStyle}">${pctText}</span>
+                    <span class="mini-bar-text" style="${textStyle}">${pctText}</span>
                 </div>
-                <span class="mini-label right">${meta.right}</span>
+                
+                <div class="mini-label right">${meta.right}</div>
             </div>
         `;
     }

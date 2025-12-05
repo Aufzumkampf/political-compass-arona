@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 政治光谱测试 (完整版)</title>
+    <title>2025 政治光谱测试 (最终完整版)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <!-- 头部 -->
+        <!-- 头部 (仅首页显示) -->
         <header>
             <h1>🗳️ 政治光谱测试</h1>
             <p class="subtitle">Political Compass 2025: Ultimate Edition</p>
@@ -80,7 +80,7 @@
                 </button>
 
                 <div class="action-buttons">
-                    <!-- 新增：跳过按钮 -->
+                    <!-- 跳过按钮 -->
                     <button class="btn btn-skip" onclick="skipQuestion()" id="btn-skip">
                         ⏭️ 跳过此题
                     </button>
@@ -119,6 +119,7 @@
             </div>
             <p style="font-size: 0.85rem; color: #999; margin-bottom: 20px; text-align: center;">点击图标查看详细档案及政治坐标。</p>
             
+            <!-- 图鉴列表容器 -->
             <div id="gallery-container" class="gallery-grid"></div>
         </div>
 
@@ -134,7 +135,7 @@
                 <div class="modal-body">
                     <p id="modal-desc" class="modal-text"></p>
                     
-                    <!-- 维度条 -->
+                    <!-- 维度条区域 -->
                     <div class="info-section">
                         <h4>📊 核心政治坐标</h4>
                         <div id="modal-stats-bar"></div>

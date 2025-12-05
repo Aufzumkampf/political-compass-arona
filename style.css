@@ -60,26 +60,11 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
 .btn-finish { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; margin-top: 5px; }
 .btn-confirm { background-color: var(--accent-green); color: white; margin-bottom: 10px; }
 
-/* 新增：跳过按钮样式 */
 .btn-skip {
-    background-color: #fff;
-    border: 1px dashed #ccc;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-    padding: 10px 20px;
-    transition: all 0.2s;
+    background-color: #fff; border: 1px dashed #ccc; color: #7f8c8d; font-size: 0.9rem; padding: 10px 20px; transition: all 0.2s;
 }
-.btn-skip:hover {
-    background-color: #f9f9f9;
-    border-color: #999;
-    color: #555;
-}
-.btn-skip:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: #fafafa;
-    border-color: #eee;
-}
+.btn-skip:hover { background-color: #f9f9f9; border-color: #999; color: #555; }
+.btn-skip:disabled { opacity: 0.5; cursor: not-allowed; background-color: #fafafa; border-color: #eee; }
 
 .action-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
 
@@ -143,15 +128,31 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
 .gallery-icon { font-size: 2.5rem; margin-bottom: 8px; line-height: 1; }
 .gallery-name { font-size: 0.9rem; font-weight: 600; color: var(--text-main); line-height: 1.3; }
 
-.mini-stat-row { margin-bottom: 15px; display: block; }
-.mini-stat-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 6px; }
-.mini-label { font-size: 0.85rem; color: #555; width: 45%; }
-.mini-label.left { text-align: left; }
-.mini-label.right { text-align: right; }
-.mini-bar-container { height: 10px; background: #e0e0e0; border-radius: 5px; position: relative; width: 100%; overflow: visible; }
-.mini-bar-fill { height: 100%; position: absolute; top: 0; border-radius: 5px; }
-.mini-bar-value { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 1px 5px; border-radius: 4px; font-size: 0.7rem; line-height: 1.2; white-space: nowrap; }
-.mini-bar-value::after { content: ""; position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%); border-width: 3px 3px 0; border-style: solid; border-color: #333 transparent transparent transparent; }
+/* 📊 弹窗内维度条 (Grid 布局重构版 - 修复错位) */
+.mini-stat-row {
+    display: grid;
+    grid-template-columns: 25% 1fr 25%; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 12px;
+    position: relative;
+}
+.mini-label { font-size: 0.8rem; color: #666; line-height: 1.2; }
+.mini-label.left { text-align: right; }
+.mini-label.right { text-align: left; }
+.mini-bar-container {
+    height: 10px; background: #eee; border-radius: 5px; 
+    position: relative; width: 100%;
+}
+.mini-bar-fill {
+    height: 100%; position: absolute; top: 0; border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+}
+.mini-bar-text {
+    position: absolute; top: -16px;
+    font-size: 0.75rem; font-weight: bold; line-height: 1;
+    white-space: nowrap;
+}
 
 .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px); }
 .modal-content { background: #fff; width: 90%; max-width: 600px; max-height: 85vh; border-radius: 16px; overflow-y: auto; position: relative; padding: 0; }
@@ -168,6 +169,7 @@ header h1 { margin-bottom: 5px; color: var(--text-main); }
 
 footer { margin-top: 40px; margin-bottom: 20px; text-align: center; font-size: 0.85rem; color: #999; border-top: 1px solid #eee; padding-top: 20px; }
 
+/* 📱 手机端深度优化 (Mobile Optimization) */
 @media (max-width: 600px) {
     .container { padding: 8px; width: 96%; }
     .card { padding: 15px 12px !important; margin-bottom: 10px; }
@@ -187,7 +189,9 @@ footer { margin-top: 40px; margin-bottom: 20px; text-align: center; font-size: 0
     .gallery-icon { font-size: 2rem; }
     .gallery-name { font-size: 0.8rem; }
     .info-grid { grid-template-columns: 1fr; gap: 15px; }
-    
-    /* 适配小屏幕的跳过按钮 */
     .btn-skip { padding: 8px 16px; font-size: 0.85rem; margin-bottom: 8px; }
+    
+    /* 手机端弹窗维度条微调 */
+    .mini-stat-row { grid-template-columns: 28% 1fr 28%; gap: 5px; }
+    .mini-label { font-size: 0.7rem; }
 }
